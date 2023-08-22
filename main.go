@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 )
 
 func main() {
@@ -13,8 +14,18 @@ func main() {
 		return
 	}
 
+	ex, err := os.Executable()
+	if err != nil {
+		fmt.Printf("error getting current executable: %s\n", err)
+		return
+	}
+
+	zdotdirPath := filepath.Join(filepath.Dir(ex), "zee-dot-dir")
+
 	cmd := exec.Command(binPath)
-	cmd.Env = []string{"ZDOTDIR=/Users/adam.neumann/workspace/homebrew-shell/zee-dot-dir"}
+	cmd.Env = []string{
+		"ZDOTDIR=" + zdotdirPath,
+	}
 	cmd.Args = []string{}
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
