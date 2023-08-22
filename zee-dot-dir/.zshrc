@@ -5,7 +5,7 @@ export PATH=$PATH:/usr/sbin
 export TERM=xterm
 
 # some bling
-PS1="🐢 > "
+PS1="🐷 > "
 
 # Homebrew (always load)
 eval "$(/opt/homebrew/bin/brew shellenv)"
