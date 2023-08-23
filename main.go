@@ -19,7 +19,12 @@ func main() {
 		return
 	}
 
-	binPath, err := exec.LookPath("zsh")
+	brewPath, err := exec.LookPath("brew")
+	if err != nil {
+		fmt.Printf("error finding 'brew' executable: %s\n", err)
+		return
+	}
+	zshPath, err := exec.LookPath("zsh")
 	if err != nil {
 		fmt.Printf("error looking up zsh path: %s\n", err)
 		return
@@ -33,11 +38,22 @@ func main() {
 
 	zdotdirPath := filepath.Join(filepath.Dir(ex), "zee-dot-dir")
 
-	cmd := exec.Command(binPath)
-	cmd.Env = []string{
+	cmd := exec.Command(brewPath)
+	cmd.Args = []string{
+		"IGNORED", // TODO: figure out why this placeholder first arg is required
+		"bundle",
+		"exec",
+		"--no-upgrade", // pls no network calls
+		"--",
+		"env",
+		// force zsh to use our special zshrc file
 		"ZDOTDIR=" + zdotdirPath,
+		zshPath,
 	}
-	cmd.Args = []string{}
+	cmd.Env = []string{
+		// required by homebrew
+		"HOME=" + os.Getenv("HOME"),
+	}
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
