@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"os/exec"
@@ -8,6 +9,16 @@ import (
 )
 
 func main() {
+	helpFlag := flag.Bool("help", false, "display usage")
+	flag.Parse()
+
+	if *helpFlag {
+		fmt.Printf("Usage: %s [OPTIONS]\n", os.Args[0])
+		fmt.Println("Options:")
+		flag.PrintDefaults()
+		return
+	}
+
 	binPath, err := exec.LookPath("zsh")
 	if err != nil {
 		fmt.Printf("error looking up zsh path: %s\n", err)
