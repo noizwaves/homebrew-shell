@@ -13,7 +13,7 @@ func main() {
 	flag.Parse()
 
 	if *helpFlag {
-		fmt.Printf("Usage: %s [OPTIONS]", os.Args[0])
+		fmt.Printf("Usage: %s [OPTIONS]\n", os.Args[0])
 		fmt.Println("Options:")
 		flag.PrintDefaults()
 		return
