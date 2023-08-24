@@ -42,6 +42,6 @@ fi
 
 # goenv
 # TODO: improve impl
-if [[ "$HOMEBREW_DEPENDENCIES" == *"rbenv"* ]]; then
+if [[ "$HOMEBREW_DEPENDENCIES" == *"goenv"* ]]; then
   eval "$($HOMEBREW_PREFIX/bin/goenv init -)"
 fi
