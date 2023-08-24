@@ -39,3 +39,9 @@ fi
 if [[ "$HOMEBREW_DEPENDENCIES" == *"rbenv"* ]]; then
   eval "$($HOMEBREW_PREFIX/bin/rbenv init - zsh)"
 fi
+
+# goenv
+# TODO: improve impl
+if [[ "$HOMEBREW_DEPENDENCIES" == *"rbenv"* ]]; then
+  eval "$($HOMEBREW_PREFIX/bin/goenv init -)"
+fi
